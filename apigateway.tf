@@ -3,7 +3,7 @@
 resource oci_apigateway_gateway export_ai-service-gateway {
   compartment_id = var.compartment_ocid
   display_name  = "ai-service-gateway"
-  endpoint_type = "PRIVATE"
+  endpoint_type = "PUBLIC"
   freeform_tags = {
   }
   network_security_group_ids = [
@@ -11,7 +11,7 @@ resource oci_apigateway_gateway export_ai-service-gateway {
   response_cache_details {
     type = "NONE"
   }
-  subnet_id = oci_core_subnet.tf-demo07c-private-subnet.id
+  subnet_id = oci_core_subnet.tf-demo07c-public-subnet.id
 }
 
 resource oci_apigateway_deployment export_ai-vision-service {
@@ -21,6 +21,21 @@ resource oci_apigateway_deployment export_ai-vision-service {
   path_prefix = "/"
   specification {
     request_policies {
+      cors {
+        allowed_headers = [
+          "content-type",
+        ]
+        allowed_methods = [
+          "POST",
+        ]
+        allowed_origins = [
+          "*",
+        ]
+        exposed_headers = [
+        ]
+        is_allow_credentials_enabled = "false"
+        max_age_in_seconds           = "0"
+      }
       mutual_tls {
         allowed_sans = [
         ]

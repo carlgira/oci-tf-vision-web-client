@@ -65,16 +65,15 @@ OCI vision web client
 </html>
 EOF
 
+systemctl start httpd
 systemctl enable httpd
-systemctl restart httpd
-
 
 echo "========== Clone app"
 git clone https://github.com/carlgira/oci-vision-web-client /var/www/html/oci-vision-web-client
 
 
 echo "========== Replace variables"
-sed -i "s/##endpoint##/ognjexm6ldahjrhn3pnyjwjwgq.apigateway.eu-frankfurt-1.oci.customer-oci.com/g" /var/www/html/oci-vision-web-client/js/variables.json
+sed -i "s/##endpoint##/mbvypf2ufli7fhpusbqrd6h3zy.apigateway.eu-frankfurt-1.oci.customer-oci.com/g" /var/www/html/oci-vision-web-client/js/variables.json
 sed -i "s/##path##/analize-image/g" /var/www/html/oci-vision-web-client/js/variables.json
 sed -i "s/##modelId##/ocid1.datalabelingdataset.oc1.eu-frankfurt-1.amaaaaaaqtij3maavxwtdmb3phrpzbio5grfu77bpaez5ufendrjwda3gitq/g" /var/www/html/oci-vision-web-client/js/variables.json
 sed -i "s/##labels##/Eiffel_Tower:Eiffel Tower,Stonehenge:Stonehenge,Trevi_fountain:Trevi fountain,Great_Pyramid_of_Giza:Pyramid of Giza,Louvre_Pyramid:Louvre Pyramid/g" /var/www/html/oci-vision-web-client/js/variables.json
@@ -82,6 +81,7 @@ sed -i "s/##labels##/Eiffel_Tower:Eiffel Tower,Stonehenge:Stonehenge,Trevi_fount
 
 echo "========== Open port 80/tcp in Linux Firewall"
 /bin/firewall-offline-cmd --add-port=80/tcp
+
 
 echo "========== Final reboot"
 reboot

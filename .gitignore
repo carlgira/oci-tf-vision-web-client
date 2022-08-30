@@ -31,3 +31,9 @@ override.tf.json
 
 # Ignore certs directory
 certs
+
+# Ssh conf
+sshcfg
+
+# Instance of script
+scripts/bootstrap_websrv.sh

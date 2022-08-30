@@ -76,7 +76,7 @@ echo "========== Replace variables"
 sed -i "s/##endpoint##/$ENDPOINT/g" /var/www/html/oci-vision-web-client/js/variables.json
 sed -i "s/##path##/$PATH/g" /var/www/html/oci-vision-web-client/js/variables.json
 sed -i "s/##modelId##/$MODEL_ID/g" /var/www/html/oci-vision-web-client/js/variables.json
-sed -i "s/##labels##/$LABELS/g" /var/www/html/oci-vision-web-client/js/variables.json
+sed -i "s/##labels##/'$LABELS'/g" /var/www/html/oci-vision-web-client/js/variables.json
 
 
 echo "========== Open port 80/tcp in Linux Firewall"
