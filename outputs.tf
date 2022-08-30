@@ -36,6 +36,11 @@ output CONNECTIONS {
      ssh -F sshcfg d07c-bastion             to connect to bastion host
      ssh -F sshcfg d07c-ws1                 to connect to Web server #1
      ssh -F sshcfg d07c-ws2                 to connect to Web server #2
+
+  2) ---- Load balancer
+    https://${oci_load_balancer_load_balancer.tf-demo07c-lb.ip_address_details[0].ip_address}/oci-vision-web-client/index.html
 EOF
+
+  
 
 }
