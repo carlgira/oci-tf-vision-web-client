@@ -7,7 +7,7 @@ resource oci_load_balancer_backendset tf-demo07c-lb-bes {
     port                = "80"
     protocol            = "HTTP"
     response_body_regex = ".*"
-    url_path            = "/"
+    url_path            = "/index.php"
     retries             = 1
     interval_ms         = "10000"
   }

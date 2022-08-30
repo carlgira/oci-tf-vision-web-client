@@ -19,4 +19,22 @@ variable "AD_bastion" {}
 variable "AD_websrvs" {}
 variable "BootStrapFile_websrv" {}
 variable "BootStrapFile_bastion" {}
+variable "BootStrapFile_template_websrv" {}
 variable "verify_peer_certificate" {}
+variable "ocir_user_name" {}
+variable "labels" {}
+variable "model_id" {}
+variable "ocir_user_password" {}
+variable "ocir_repo_name" {
+  default = "ai-vision-functions"
+}
+
+data "oci_objectstorage_namespace" "get_namespace" {
+  compartment_id = var.tenancy_ocid
+}
+
+locals {
+  ocir_docker_repository = join("", [lower(lookup(data.oci_identity_regions.oci_regions.regions[0], "key" )), ".ocir.io"])
+  #ocir_namespace = lookup(data.oci_identity_tenancy.oci_tenancy, "name" )
+  ocir_namespace = lookup(data.oci_objectstorage_namespace.get_namespace, "namespace")
+}

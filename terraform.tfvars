@@ -36,6 +36,7 @@ AD_websrvs           = [ "1", "2" ]
 
 # ---- Cloud-init post-provisioning scripts
 BootStrapFile_websrv         = "scripts/bootstrap_websrv.sh"
+BootStrapFile_template_websrv         = "scripts/bootstrap_websrv_template.sh"
 BootStrapFile_bastion        = "scripts/bootstrap_bastion.sh"
 
 # ---- Verify certificate on Client browser

@@ -1,0 +1,17 @@
+Host d07c-bastion
+          Hostname 130.61.99.121
+          User opc
+          IdentityFile ./certs/instance/key.pem
+          StrictHostKeyChecking no
+Host d07c-ws1
+          Hostname 10.0.1.2
+          User opc
+          IdentityFile ./certs/instance/key.pem
+          StrictHostKeyChecking no
+          proxycommand /usr/bin/ssh -F sshcfg -W %h:%p d07c-bastion
+Host d07c-ws2
+          Hostname 10.0.1.3
+          User opc
+          IdentityFile ./certs/instance/key.pem
+          StrictHostKeyChecking no
+          proxycommand /usr/bin/ssh -F sshcfg -W %h:%p d07c-bastion

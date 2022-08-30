@@ -36,7 +36,6 @@ output CONNECTIONS {
      ssh -F sshcfg d07c-bastion             to connect to bastion host
      ssh -F sshcfg d07c-ws1                 to connect to Web server #1
      ssh -F sshcfg d07c-ws2                 to connect to Web server #2
-
 EOF
 
 }

@@ -9,11 +9,13 @@ resource oci_functions_application export_pythonapp {
 }
 
 resource oci_functions_function export_pythonfn {
+  depends_on = [null_resource.function_Push2OCIR]
   application_id = oci_functions_application.export_pythonapp.id
   display_name = "pythonfn"
-  image              = "fra.ocir.io/wedoinfra/demofunc/pythonfn:0.0.14"
-  image_digest       = "sha256:1fdcfde701008a49aee4e2e699c29d35645d9d404d7bb317375b34a74ffef0da"
+  image = "${local.ocir_docker_repository}/${local.ocir_namespace}/${var.ocir_repo_name}/ai-vision-func:0.0.1"
   memory_in_mbs      = "256"
+  config = { 
+      "REGION" : "${var.region}"
+    }
   timeout_in_seconds = "30"
 }
-

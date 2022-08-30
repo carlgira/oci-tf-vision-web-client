@@ -17,3 +17,17 @@ data oci_core_images ImageOCID-ol7 {
   }
 }
 
+data "oci_load_balancer_hostnames" "lb_hostnames_ds" {
+    load_balancer_id = oci_load_balancer_load_balancer.tf-demo07c-lb.id
+}
+
+data "oci_apigateway_gateway" "api_gateway_ds" {
+    gateway_id = oci_apigateway_gateway.export_ai-service-gateway.id
+}
+
+data "oci_identity_regions" "oci_regions" {
+  filter {
+    name = "name" 
+    values = [var.region]
+  }
+}
