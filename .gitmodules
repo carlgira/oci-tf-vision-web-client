@@ -1,0 +1,3 @@
+[submodule "functions/ai-vision-func"]
+	path = functions/ai-vision-func
+	url = https://github.com/carlgira/oci-ai-vision-func
