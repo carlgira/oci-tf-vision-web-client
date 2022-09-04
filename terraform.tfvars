@@ -6,10 +6,10 @@ authorized_ips_list = [
 ]
 
 # ---- SSH key pairs
-ssh_public_key_file_websrv   = "./certs/instance/key.pem.pub"
-ssh_private_key_file_websrv  = "./certs/instance/key.pem"
-ssh_public_key_file_bastion  = "./certs/instance/key.pem.pub"
-ssh_private_key_file_bastion = "./certs/instance/key.pem"
+ssh_public_key_file_websrv   = "certs/instance/key.pem.pub"
+ssh_private_key_file_websrv  = "certs/instance/key.pem"
+ssh_public_key_file_bastion  = "certs/instance/key.pem.pub"
+ssh_private_key_file_bastion = "certs/instance/key.pem"
 
 # ---- Certificate for Load Balancer listener in HTTPS mode
 # false: create and use a "Load Balancer Managed Certificate"

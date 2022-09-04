@@ -1,38 +1,6 @@
 # ------ Create 2 compute instances for web servers
 
-resource "null_resource" "ReplaceVariables" {
-
-  provisioner "local-exec" {
-    command = "cp ${var.BootStrapFile_template_websrv} ${var.BootStrapFile_websrv}"
-    working_dir = "${path.module}"
-  }
-  
-  provisioner "local-exec" {
-    command = "sed -i'.original' -e s/\\$ENDPOINT/${substr(oci_apigateway_deployment.export_ai-vision-service.endpoint, 8,length(oci_apigateway_deployment.export_ai-vision-service.endpoint) -9)}/g ${var.BootStrapFile_websrv}"
-    working_dir = "${path.module}"
-  }
-
-  provisioner "local-exec" {
-    command = "sed -i'.original' -e s/\\$PATH/${substr(oci_apigateway_deployment.export_ai-vision-service.specification[0].routes[0].path, 1,-1)}/g ${var.BootStrapFile_websrv}"
-    working_dir = "${path.module}"
-  }
-
-  provisioner "local-exec" {
-    command = "sed -i'.original' -e s/\\$MODEL_ID/${var.model_id}/g ${var.BootStrapFile_websrv}"
-    working_dir = "${path.module}"
-  }
-
-  provisioner "local-exec" {
-    command = "sed -i'.original' -e s/\\$LABELS/\"${var.labels}\"/g ${var.BootStrapFile_websrv}"
-    working_dir = "${path.module}"
-  }
-}
-
 resource oci_core_instance tf-demo07c-ws {
-  depends_on = [
-    null_resource.ReplaceVariables
-  ]
-
   lifecycle {
     ignore_changes = [
       metadata
@@ -59,6 +27,28 @@ resource oci_core_instance tf-demo07c-ws {
 
   metadata = {
     ssh_authorized_keys = file(var.ssh_public_key_file_websrv)
-    user_data           = base64encode(file(var.BootStrapFile_websrv))
+  }
+
+  provisioner "file" {
+    source      = var.BootStrapFile_websrv
+    destination = "/tmp/script.sh"
+  }
+
+  connection {
+    type        = "ssh"
+    host        = "${self.private_ip}"
+    user        = "opc"
+    private_key = "${file(var.ssh_private_key_file_websrv)}"
+
+    bastion_host        = "${oci_core_instance.tf-demo07c-bastion.public_ip}"
+    bastion_user        = "opc"
+    bastion_private_key = "${file(var.ssh_private_key_file_bastion)}"
+  }
+
+  provisioner "remote-exec" {
+    inline = [
+      "chmod +x /tmp/script.sh",
+      "sudo /tmp/script.sh ${substr(oci_apigateway_deployment.export_ai-vision-service.endpoint, 8,length(oci_apigateway_deployment.export_ai-vision-service.endpoint) -9)} ${substr(oci_apigateway_deployment.export_ai-vision-service.specification[0].routes[0].path, 1,-1)} ${var.model_id}  '${var.labels}' ",
+    ]
   }
 }

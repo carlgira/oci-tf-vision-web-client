@@ -5,7 +5,7 @@ mkdir -p certs/instance
 mkdir -p certs/load-balancer
 
 echo 'Create keys to ssh bastion and webservers'
-ssh-keygen -t rsa -b 2048 -f certs/instance/key.pem
+ssh-keygen -t rsa -b 2048 -f certs/instance/key.pem -P ""
 
 echo 'Generate certs for load balancer'
 cd certs/load-balancer
