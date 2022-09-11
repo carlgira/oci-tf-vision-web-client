@@ -29,6 +29,23 @@ variable "ocir_repo_name" {
   default = "ai-vision-functions"
 }
 
+variable "adb_username" {}
+variable "adb_type" {}
+variable "adb_cpu_core_count" {}
+variable "adb_data_storage_tbs" {}
+variable "adb_db_name" {}
+variable "adb_display_name" {}
+
+variable "adb_wallet_type" {}
+variable "adb_wallet_filename" {}
+variable "adb_license_model" {}
+
+variable "vault_type" {}
+variable "vault_display_name" {}
+variable "key_key_shape_algorithm" {}
+variable "key_key_shape_length" {}
+variable "key_display_name" {}
+
 data "oci_objectstorage_namespace" "get_namespace" {
   compartment_id = var.tenancy_ocid
 }
@@ -38,3 +55,4 @@ locals {
   #ocir_namespace = lookup(data.oci_identity_tenancy.oci_tenancy, "name" )
   ocir_namespace = lookup(data.oci_objectstorage_namespace.get_namespace, "namespace")
 }
+

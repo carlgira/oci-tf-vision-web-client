@@ -23,6 +23,16 @@ EOF
   filename = "sshcfg"
 }
 
+output ADB {
+  value = <<EOF
+  service console URL = ${oci_database_autonomous_database.tf-demo20-adb.service_console_url}
+        user      = ${var.adb_username}
+        password  = ${random_string.tf-demo20-adb-password.result}
+
+  walltet-password: ${random_string.tf-demo20-wallet-password.result}
+EOF
+}
+
 # ------ Display the complete ssh commands needed to connect to the compute instances
 output CONNECTIONS {
   value = <<EOF
@@ -40,7 +50,4 @@ output CONNECTIONS {
   2) ---- Load balancer
     https://${oci_load_balancer_load_balancer.tf-demo07c-lb.ip_address_details[0].ip_address}/oci-vision-web-client/index.html
 EOF
-
-  
-
 }

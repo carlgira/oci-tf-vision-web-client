@@ -41,3 +41,22 @@ BootStrapFile_bastion        = "scripts/bootstrap_bastion.sh"
 
 # ---- Verify certificate on Client browser
 verify_peer_certificate = "false"
+
+
+# -- Autonomous Database (ADW or ATP)
+adb_username = "admin"
+adb_type                = "AJD"    # OLTP for ATP, DW for ADW, AJD JSON database
+adb_cpu_core_count      = "1"
+adb_license_model       = "LICENSE_INCLUDED" # Required for AJD
+adb_data_storage_tbs    = "1"
+adb_db_name             = "visionModelData"
+adb_display_name        = "visionModelData"
+adb_wallet_type         = "SINGLE"                  # SINGLE for instance wallet or ALL for regional wallet
+adb_wallet_filename     = "./functions/ai-vision-func/wallet.zip"
+
+# -- Vault
+vault_display_name = "ai_model_vault"
+vault_type = "DEFAULT" # DEFAULT | VIRTUAL_PRIVATE
+key_key_shape_algorithm = "AES"
+key_key_shape_length = 32
+key_display_name = "ai_model_vault_key"

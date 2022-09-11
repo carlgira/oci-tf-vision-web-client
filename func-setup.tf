@@ -17,7 +17,7 @@ resource "null_resource" "function_Push2OCIR" {
   }
 
   provisioner "local-exec" {
-    command     = "fn build --verbose"
+    command     = "docker-buildx build --platform linux/amd64 -t ai-vision-func ."
     working_dir = "${path.module}/functions/ai-vision-func"
   }
 
