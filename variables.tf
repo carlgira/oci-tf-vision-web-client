@@ -22,8 +22,12 @@ variable "BootStrapFile_bastion" {}
 variable "BootStrapFile_template_websrv" {}
 variable "verify_peer_certificate" {}
 variable "ocir_user_name" {}
-variable "labels" {}
-variable "model_id" {}
+variable "labels" {
+  default = ""
+}
+variable "model_id" {
+  default = ""
+}
 variable "ocir_user_password" {}
 variable "ocir_repo_name" {
   default = "ai-vision-functions"

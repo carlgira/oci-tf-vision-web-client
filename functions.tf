@@ -9,7 +9,7 @@ resource oci_functions_application export_pythonapp {
     "DB_DNS" = [for profile in oci_database_autonomous_database.tf-demo20-adb.connection_strings[0].profiles : profile.display_name  if upper(profile.consumer_group) == "HIGH"][0]
     "PASSWORD_SECRET_OCID" = oci_vault_secret.ai_model_atp_password.id
     "WALLET_PASSWORD_SECRET_OCID" = oci_vault_secret.ai_model_atp_wallet_password.id
-    "TNS_ADMIN": "/tmp/dbwallet"
+    "TNS_ADMIN": "/function/wallet"
   }
 }
 
