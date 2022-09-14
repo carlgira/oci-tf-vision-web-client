@@ -1,6 +1,8 @@
 variable "tenancy_ocid" {}
 variable "compartment_ocid" {}
-variable "region" {}
+variable "region" {
+  default = "eu-frankfurt-1"
+}
 variable "authorized_ips_list" {}
 variable "ssh_public_key_file_websrv" {}
 variable "ssh_private_key_file_websrv" {}

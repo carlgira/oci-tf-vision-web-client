@@ -37,3 +37,5 @@ sshcfg
 
 # Instance of script
 scripts/bootstrap_websrv.sh
+
+LOCAL.md
