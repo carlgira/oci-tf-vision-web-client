@@ -23,16 +23,22 @@ TODO => Image
 
 ## Configuration
 
-1. Install the OCI-cli and configure a default profile. You can follow this instructions https://medium.com/@carlgira/install-oci-cli-and-configure-a-default-profile-802cc61abd4f
+1. Clone this repository (it has a submodule so you need to clone recursive)
 
-2. Create an Auth token for your user. (you are going to need it for pushing the function image to OCI registry). https://docs.oracle.com/en-us/iaas/Content/Registry/Tasks/registrygettingauthtoken.htm
+```
+git clone --recurse-submodules https://github.com/carlgira/oci-tf-vision-web-client.gi
+```
 
-3. Create the certificates for the load balancer and the private keys for the compute instances.
+2. Install the OCI-cli and configure a default profile. You can follow this instructions https://medium.com/@carlgira/install-oci-cli-and-configure-a-default-profile-802cc61abd4f
+
+3. Create an Auth token for your user. (you are going to need it for pushing the function image to OCI registry). https://docs.oracle.com/en-us/iaas/Content/Registry/Tasks/registrygettingauthtoken.htm
+
+4. Create the certificates for the load balancer and the private keys for the compute instances.
 ```
 sh create_self_signed_certificate.sh
 ```
 
-4. Set the variables in your PATH
+5. Set the variables in your PATH
 
 - Required variables, the tenancy_ocid and the comparment_ocid of the work comparment
 ```
@@ -45,7 +51,7 @@ export TF_VAR_compartment_ocid=<>
 export TF_VAR_model_id=<>
 ```
 
-5. Create dynamic groups.
+6. Create dynamic groups.
 
 - Dynamic group to select the API gateway resources in the work comparment
 
@@ -60,7 +66,7 @@ ALL {resource.type = 'ApiGateway', resource.compartment.id = 'ocid1.compartment.
 ALL {resource.type = 'fnfunc', resource.compartment.id = 'ocid1.compartment.xxx'}
 ```
 
-6. Add policies.
+7. Add policies.
 
 - Add policies so funtions have access to the vision service and the vault service
 ```
