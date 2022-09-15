@@ -18,4 +18,28 @@ INSERT INTO ITEM_DETAILS (doc) VALUES (
 }'
 );
 
+INSERT INTO ITEM_DETAILS (doc) VALUES (
+'{
+  "id" : "Trevi_fountain",
+  "name" : "Trevi fountain",
+  "description": "The Trevi Fountain is an 18th-century fountain in the Trevi district in Rome, Italy, designed by Italian architect Nicola Salvi and completed by Giuseppe Pannini and several others. Standing 26.3 metres (86 ft) high and 49.15 metres (161.3 ft) wide."
+}'
+);
+
+INSERT INTO ITEM_DETAILS (doc) VALUES (
+'{
+  "id" : "Great_Pyramid_of_Giza",
+  "name" : "Great Pyramid of Giza",
+  "description": "The Great Pyramid of Giza is the largest Egyptian pyramid and the tomb of Fourth Dynasty pharaoh Khufu. Built in the early 26th century BC during a period of around 27 years, the pyramid is the oldest of the Seven Wonders of the Ancient World"
+}'
+);
+
+INSERT INTO ITEM_DETAILS (doc) VALUES (
+'{  
+  "id" : "Lotus_Temple",  
+  "name" : "Lotus Temple",  
+  "description": "The Lotus Temple, located in Delhi, India, is a Bahai House of Worship that was dedicated in December 1986. Notable for its flowerlike shape, it has become a prominent attraction in the city"
+}'
+);
+
 commit;

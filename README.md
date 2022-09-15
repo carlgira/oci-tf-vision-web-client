@@ -14,7 +14,7 @@ The idea is to have a quick architecture to be able to test custom vision models
 - Two compute instances as web servers of the app.
 - A load balancer on top of the instances to serve the page.
 
-TODO => Image
+![architecture drawio](architecture.drawio.png)
 
 ## Requirements
 
