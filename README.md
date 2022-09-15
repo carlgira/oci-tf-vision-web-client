@@ -114,3 +114,10 @@ During execution, the script will ask you for your user and for the auth token y
 
 ## Customize the database
 Customize the init_script.sql an create the records of the labels you want the aplication to show.
+
+
+## References
+
+I used several examples on this Github repo https://github.com/cpauliat/my-terraform-oci-examples they are lots of them, great work.
+
+
