@@ -4,7 +4,7 @@
 resource "null_resource" "Login2OCIR" {
 
   provisioner "local-exec" {
-    command = "echo '${var.ocir_user_password}' |  docker login ${local.ocir_docker_repository} --username ${local.ocir_namespace}/${var.ocir_user_name} --password-stdin"
+    command = "echo '${var.ocir_user_auth_token}' |  docker login ${local.ocir_docker_repository} --username ${local.ocir_namespace}/${var.ocir_user_name} --password-stdin"
   }
 }
 

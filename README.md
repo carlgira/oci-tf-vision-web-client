@@ -40,16 +40,17 @@ sh create_self_signed_certificate.sh
 
 5. Set the variables in your PATH
 
-- Required variables, the tenancy_ocid and the comparment_ocid of the work comparment
+- Required variables, tenancy_ocid and the comparment_ocid of the comparment where all the resources are going to be created also the model_id of the custom vision model.
 ```
 export TF_VAR_tenancy_ocid=<>
 export TF_VAR_compartment_ocid=<>
-```
-
-- Optional Variables, the model ocid of your custom model.
-```
 export TF_VAR_model_id=<>
 ```
+
+During the execution of the script it will ask for two more variables, to log into the OCI registry.
+
+- **ocir_user_name:** The full username of your OCI account (<namespace>/username).
+- **ocir_user_auth_token:** Auth token created in the previous step.
 
 6. Create dynamic groups.
 
@@ -66,23 +67,23 @@ ALL {resource.type = 'ApiGateway', resource.compartment.id = 'ocid1.compartment.
 ALL {resource.type = 'fnfunc', resource.compartment.id = 'ocid1.compartment.xxx'}
 ```
 
-7. Add policies.
+7. Add policies, into the parent comparment.
 
 - Add policies so funtions have access to the vision service and the vault service
 ```
-allow dynamic-group functions-dg to use ai-service-vision-family in compartment ai
-allow dynamic-group functions-dg to use secret-family in compartment ai
+allow dynamic-group functions-dg to use ai-service-vision-family in compartment <comparment_name>
+allow dynamic-group functions-dg to use secret-family in compartment <comparment_name>
 ```
 
 - Add policy so api gateway can call the function
 ```
-allow dynamic-group api-gtw-dg to use functions-family in compartment <work-comparment>
+allow dynamic-group api-gtw-dg to use functions-family in compartment <comparment_name>
 ```
 
 ## Functions compilation
 I added configuration on the terraform to build and push the function to the OCI registry. Normally is not a best practice to use "local-exec" with terraform, because the execution of the script will depend on the machine you are running (in my case a mac m1). But I wanted to automatize this section as best I could.
 
-For reference you can do this manually and remove this step.
+You dont need to do this, but if you want to remove the use of the local-exec you'll need to run the next commands.
 
 ```
 # Login to OCI registry
@@ -110,13 +111,24 @@ terraform plan
 terraform apply
 ```
 
-During execution, the script will ask you for your user and for the auth token you created before (the token not your password)
-
 ## Customize the database
 Customize the init_script.sql an create the records of the labels you want the aplication to show.
 
 
-## References
+## Testing
+
+After the script completes it will it will take 1 minute until de load balancer ins active. At the end, terraform will print the load balancer url so you can access the application.
+
+*Remember that the first time the function execute, it needs time to warm up (it could take from 30 seconds to 1 minute), after that all request should go very fast.*
+
+
+## Destroy
+If yoy want to delete all the resources. 
+```
+terraform destroy
+```
+
+# References
 
 I used several examples on this Github repo https://github.com/cpauliat/my-terraform-oci-examples they are lots of them, great work.
 
