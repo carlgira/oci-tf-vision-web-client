@@ -123,7 +123,7 @@ After the script completes it will it will take 1 minute until de load balancer 
 
 
 ## Destroy
-If yoy want to delete all the resources. 
+If you want to delete all the resources. 
 ```
 terraform destroy
 ```
