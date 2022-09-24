@@ -1,6 +1,6 @@
 # OCI AI web client
 
-This is a terraform script that will create a web app to consume the ai vision service, with or without a custom model.
+This is a terraform script that will create a web app to consume the OCI vision service, with or without a custom model.
 
 The idea is to have a quick architecture to be able to test custom vision models.
 
@@ -123,7 +123,7 @@ After the script completes it will it will take 1 minute until de load balancer 
 
 
 ## Destroy
-If yoy want to delete all the resources. 
+If you want to delete all the resources. 
 ```
 terraform destroy
 ```
