@@ -1,6 +1,6 @@
-resource oci_load_balancer_backendset tf-demo07c-lb-bes {
-  name             = "tf-demo07c-lb-bes"
-  load_balancer_id = oci_load_balancer_load_balancer.tf-demo07c-lb.id
+resource oci_load_balancer_backendset lb-bes {
+  name             = "lb-bes"
+  load_balancer_id = oci_load_balancer_load_balancer.lb.id
   policy           = "ROUND_ROBIN"
 
   health_checker {
@@ -13,11 +13,11 @@ resource oci_load_balancer_backendset tf-demo07c-lb-bes {
   }
 }
 
-resource oci_load_balancer_backend tf-demo07c-lb-be {
+resource oci_load_balancer_backend lb-be {
   count            = 2
-  load_balancer_id = oci_load_balancer_load_balancer.tf-demo07c-lb.id
-  backendset_name  = oci_load_balancer_backendset.tf-demo07c-lb-bes.name
-  ip_address       = oci_core_instance.tf-demo07c-ws[count.index].private_ip
+  load_balancer_id = oci_load_balancer_load_balancer.lb.id
+  backendset_name  = oci_load_balancer_backendset.lb-bes.name
+  ip_address       = oci_core_instance.ws[count.index].private_ip
   port             = 80
   backup           = false
   drain            = false

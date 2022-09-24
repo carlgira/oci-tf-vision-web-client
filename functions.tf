@@ -2,11 +2,11 @@ resource oci_functions_application export_pythonapp {
   compartment_id = var.compartment_ocid
   display_name = "pythonapp"
   subnet_ids = [
-    oci_core_subnet.tf-demo07c-private-subnet.id
+    oci_core_subnet.private-subnet.id
   ]
   config = {
     "ATP_USERNAME" = var.adb_username
-    "DB_DNS" = [for profile in oci_database_autonomous_database.tf-demo20-adb.connection_strings[0].profiles : profile.display_name  if upper(profile.consumer_group) == "HIGH"][0]
+    "DB_DNS" = [for profile in oci_database_autonomous_database.adb.connection_strings[0].profiles : profile.display_name  if upper(profile.consumer_group) == "HIGH"][0]
     "PASSWORD_SECRET_OCID" = oci_vault_secret.ai_model_atp_password.id
     "WALLET_PASSWORD_SECRET_OCID" = oci_vault_secret.ai_model_atp_wallet_password.id
     "TNS_ADMIN": "/function/wallet"

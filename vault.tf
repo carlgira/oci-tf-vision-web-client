@@ -19,7 +19,7 @@ resource oci_vault_secret ai_model_atp_password {
     key_id = oci_kms_key.ai_model_vault_key.id
     secret_content {
         content_type = "BASE64"
-        content = base64encode(random_string.tf-demo20-adb-password.result)
+        content = base64encode(random_string.adb-password.result)
     }
     secret_name    = "atp_password"
     vault_id       = oci_kms_vault.ai_model_vault.id
@@ -30,7 +30,7 @@ resource oci_vault_secret ai_model_atp_wallet_password {
     key_id = oci_kms_key.ai_model_vault_key.id
     secret_content {
         content_type = "BASE64"
-        content = base64encode(random_string.tf-demo20-wallet-password.result)
+        content = base64encode(random_string.wallet-password.result)
     }
     secret_name    = "atp_wallet_password"
     vault_id       = oci_kms_vault.ai_model_vault.id

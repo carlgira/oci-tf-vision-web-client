@@ -1,4 +1,4 @@
-resource oci_load_balancer_load_balancer tf-demo07c-lb {
+resource oci_load_balancer_load_balancer lb {
   compartment_id = var.compartment_ocid
 
   shape          = "flexible"
@@ -8,17 +8,17 @@ resource oci_load_balancer_load_balancer tf-demo07c-lb {
   }
 
   subnet_ids = [
-    oci_core_subnet.tf-demo07c-public-subnet.id
+    oci_core_subnet.public-subnet.id
   ]
 
-  display_name = "tf-demo07c-public-lb-ssl-termination"
+  display_name = "public-lb-ssl-termination"
 }
 
 # -- Load Balancer Managed Certificate
-resource oci_load_balancer_certificate tf-demo07c-lb-certificate {
+resource oci_load_balancer_certificate lb-certificate {
   count              = var.use_cert_cs == "false" ? 1 : 0  
-  certificate_name   = "tf-demo07c-cert"
-  load_balancer_id   = oci_load_balancer_load_balancer.tf-demo07c-lb.id
+  certificate_name   = "cert"
+  load_balancer_id   = oci_load_balancer_load_balancer.lb.id
   ca_certificate     = file(var.file_ca_cert)
   passphrase         = ""
   private_key        = file(var.file_lb_key)
@@ -30,16 +30,16 @@ resource oci_load_balancer_certificate tf-demo07c-lb-certificate {
 }
 
 # -- Listener using Load Balancer Managed Certificate
-resource oci_load_balancer_listener tf-demo07c-lb-listener1 {
-  depends_on = [ oci_load_balancer_certificate.tf-demo07c-lb-certificate ]
+resource oci_load_balancer_listener lb-listener1 {
+  depends_on = [ oci_load_balancer_certificate.lb-certificate ]
   count                    = var.use_cert_cs == "false" ? 1 : 0  
-  load_balancer_id         = oci_load_balancer_load_balancer.tf-demo07c-lb.id
-  name                     = "tf-demo07c-lb-listener"
-  default_backend_set_name = oci_load_balancer_backendset.tf-demo07c-lb-bes.name
+  load_balancer_id         = oci_load_balancer_load_balancer.lb.id
+  name                     = "lb-listener"
+  default_backend_set_name = oci_load_balancer_backendset.lb-bes.name
   port                     = 443
   protocol                 = "HTTP"
   ssl_configuration {
-    certificate_name        = "tf-demo07c-cert" 
+    certificate_name        = "cert" 
     verify_peer_certificate = var.verify_peer_certificate
     verify_depth            = 5
     protocols               = [ "TLSv1.2" ]

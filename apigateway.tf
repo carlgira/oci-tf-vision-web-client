@@ -11,7 +11,7 @@ resource oci_apigateway_gateway export_ai-service-gateway {
   response_cache_details {
     type = "NONE"
   }
-  subnet_id = oci_core_subnet.tf-demo07c-public-subnet.id
+  subnet_id = oci_core_subnet.public-subnet.id
 }
 
 resource oci_apigateway_deployment export_ai-vision-service {

@@ -1,6 +1,6 @@
 # ------ Create 2 compute instances for web servers
 
-resource oci_core_instance tf-demo07c-ws {
+resource oci_core_instance ws {
   lifecycle {
     ignore_changes = [
       metadata
@@ -10,7 +10,7 @@ resource oci_core_instance tf-demo07c-ws {
   count               = 2
   availability_domain = data.oci_identity_availability_domains.ADs.availability_domains[var.AD_websrvs[count.index] - 1]["name"]
   compartment_id      = var.compartment_ocid
-  display_name        = "tf-demo07c-websrv${count.index+1}"
+  display_name        = "websrv${count.index+1}"
   shape               = "VM.Standard.E2.1"
 
   source_details {
@@ -19,7 +19,7 @@ resource oci_core_instance tf-demo07c-ws {
   }
 
   create_vnic_details {
-    subnet_id        = oci_core_subnet.tf-demo07c-private-subnet.id
+    subnet_id        = oci_core_subnet.private-subnet.id
     hostname_label   = "websrv${count.index+1}"
     private_ip       = var.websrv_private_ips[count.index]  
     assign_public_ip = false
@@ -40,7 +40,7 @@ resource oci_core_instance tf-demo07c-ws {
     user        = "opc"
     private_key = "${file(var.ssh_private_key_file_websrv)}"
 
-    bastion_host        = "${oci_core_instance.tf-demo07c-bastion.public_ip}"
+    bastion_host        = "${oci_core_instance.bastion.public_ip}"
     bastion_user        = "opc"
     bastion_private_key = "${file(var.ssh_private_key_file_bastion)}"
   }
