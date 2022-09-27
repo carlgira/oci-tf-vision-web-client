@@ -26,7 +26,7 @@ The idea is to have a quick architecture to be able to test custom vision models
 1. Clone this repository (it has a submodule so you need to clone recursive)
 
 ```
-git clone --recurse-submodules https://github.com/carlgira/oci-tf-vision-web-client.gi
+git clone --recurse-submodules https://github.com/carlgira/oci-tf-vision-web-client.git
 ```
 
 2. Install the OCI-cli and configure a default profile. You can follow this instructions https://medium.com/@carlgira/install-oci-cli-and-configure-a-default-profile-802cc61abd4f
